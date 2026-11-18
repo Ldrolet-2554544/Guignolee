@@ -145,7 +145,7 @@
                         <StackPanel Grid.Column="1">
                             <TextBox
                                 Header="Contenu du don"
-                                PlaceholderText="Ex. : Conserves de soupe"
+                                PlaceholderText="Ex. : Conserves de soupes"
                                 Text="{x:Bind ViewModel.NouveauDon.Contenu, Mode=TwoWay}" />
                         </StackPanel>
 

@@ -98,5 +98,25 @@ namespace Guignolee.ViewModels.Pages
             ChargerDonnees();
             NouveauDon = new DonViewModel(new Don());
         }
+
+        public void MarquerRemis()
+        {
+            if (DonSelectionne == null)
+            {
+                return;
+            }
+            else
+            {
+                Don? don = _donDataProvider.GetDonById(DonSelectionne.Id);
+                if (don != null)
+                {
+                    don.EstRemis = true;
+                    _donDataProvider.ModifierDon(don);
+
+                    ChargerDonnees();
+                }
+            }
+        }
     }
+
 }

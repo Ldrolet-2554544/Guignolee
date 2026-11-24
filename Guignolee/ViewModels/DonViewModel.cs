@@ -13,11 +13,11 @@ namespace Guignolee.ViewModels
         {
             _don = don;
             _errors.Add(nameof(Donateur), new ObservableCollection<ValidationResult>());
-            Validate(Donateur, nameof(Donateur));
+
             _errors.Add(nameof(Contenu), new ObservableCollection<ValidationResult>());
-            Validate(Contenu, nameof(Contenu));
+
             _errors.Add(nameof(Quantite), new ObservableCollection<ValidationResult>());
-            Validate(Quantite, nameof(Quantite));
+
         }
 
         public int Id => _don.Id;
@@ -35,6 +35,7 @@ namespace Guignolee.ViewModels
                 {
                     _don.Donateur = value;
                     RaisePropertyChanged();
+                    Validate(Donateur, nameof(Donateur));
                 }
             }
         }
@@ -52,6 +53,7 @@ namespace Guignolee.ViewModels
                 {
                     _don.Contenu = value;
                     RaisePropertyChanged();
+                    Validate(Contenu, nameof(Contenu));
                 }
             }
         }
@@ -66,6 +68,7 @@ namespace Guignolee.ViewModels
                 {
                     _don.Quantite = value;
                     RaisePropertyChanged();
+                    Validate(Quantite, nameof(Quantite));
 
                 }
             }
@@ -91,6 +94,8 @@ namespace Guignolee.ViewModels
                 if (_don.EstRemis != value)
                 {
                     _don.EstRemis = value;
+                    RaisePropertyChanged();
+                   
                 }
             }
         }

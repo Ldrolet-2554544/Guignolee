@@ -8,7 +8,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="using:Guignolee.ViewModels"
     mc:Ignorable="d">
-
+    <Page.Resources>
+        <DataTemplate x:Key="ErreurTemplate">
+            <TextBlock
+                Foreground="Coral"
+                Text="{Binding ErrorMessage}"
+                TextWrapping="Wrap" />
+        </DataTemplate>
+    </Page.Resources>
+    
     <ScrollViewer>
 
         <Grid Padding="24" RowSpacing="16">
@@ -78,7 +86,7 @@
                         Margin="0,8"
                         AutomationProperties.Name="Dons à remettre"
                         ItemsSource="{x:Bind ViewModel.Dons, Mode=OneWay}"
-                        SelectedItem="{x:Bind ViewModel.DonSelectionne, Mode=OneWay}">
+                        SelectedItem="{x:Bind ViewModel.DonSelectionne, Mode=TwoWay}">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="viewmodels:DonViewModel">
                                 <StackPanel Padding="0,8">
@@ -140,6 +148,9 @@
                                 Header="Donateur"
                                 PlaceholderText="Prénom Nom"
                                 Text="{x:Bind ViewModel.NouveauDon.Donateur, Mode=TwoWay}" />
+                            <ItemsControl 
+                                ItemTemplate="{StaticResource ErreurTemplate}"
+                                ItemsSource="{x:Bind ViewModel.NouveauDon.GetErrors('Donateur'), Mode=OneWay}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
@@ -147,6 +158,9 @@
                                 Header="Contenu du don"
                                 PlaceholderText="Ex. : Conserves de soupes"
                                 Text="{x:Bind ViewModel.NouveauDon.Contenu, Mode=TwoWay}" />
+                            <ItemsControl 
+                                ItemTemplate="{StaticResource ErreurTemplate}"
+                                ItemsSource="{x:Bind ViewModel.NouveauDon.GetErrors('Contenu'), Mode=OneWay}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="2">
@@ -155,25 +169,16 @@
                                 MaxLength="3"
                                 PlaceholderText="Ex. : 24"
                                 Text="{x:Bind ViewModel.NouveauDon.Quantite, Mode=TwoWay}" />
+                            <ItemsControl 
+                                ItemTemplate="{StaticResource ErreurTemplate}"
+                                ItemsSource="{x:Bind ViewModel.NouveauDon.GetErrors('Quantite'), Mode=OneWay}"/>
                         </StackPanel>
-                        <ItemsControl ItemsSource="{x:Bind ViewModel.NouveauDon.GetError(), Mode=OneWay}">
-
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock
-                                        Foreground="Coral"
-                                        Text="{Binding ErrorMessage}"
-                                        TextWrapping="Wrap" />
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-
-                        </ItemsControl>
                         <CheckBox
                             Grid.Column="3"
                             Margin="0,28,0,0"
                             VerticalAlignment="Top"
                             Content="Périssable"
-                            IsChecked="False" />
+                            IsChecked="{x:Bind ViewModel.NouveauDon.EstPerissable, Mode=TwoWay}" />
 
                         <Button
                             Grid.Column="4"

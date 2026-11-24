@@ -52,12 +52,12 @@ namespace Guignolee.ViewModels
         /// <summary>
         /// Retourne la collection d'erreurs de la propriété passée en paramètre à partir du dictionnaire d'erreurs
         /// </summary>
-        /// <param name="propriete">Propriété pour laquelle on veut obtenir la collection d'erreurs</param>
-        public IEnumerable GetErrors(string propriete)
+        /// <param name="propertyName">Propriété pour laquelle on veut obtenir la collection d'erreurs</param>
+        public IEnumerable GetErrors(string propertyName)
         {
-            if (_errors.ContainsKey(propriete))
+            if (_errors.ContainsKey(propertyName))
             {
-                return _errors[propriete];
+                return _errors[propertyName];
             }
             else
             {

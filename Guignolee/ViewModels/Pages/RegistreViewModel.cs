@@ -117,6 +117,17 @@ namespace Guignolee.ViewModels.Pages
                 }
             }
         }
+
+        public void ModifierDon()
+        {
+            if (DonSelectionne == null)
+            {
+                return;
+            }
+            else
+            {
+                ModifierDonViewModel pageModif = new ModifierDonViewModel(DonSelectionne);
+            }
     }
 
 }

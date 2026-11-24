@@ -118,16 +118,20 @@ namespace Guignolee.ViewModels.Pages
             }
         }
 
-        public void ModifierDon()
+        public void ModifierDon(DonViewModel donModifieVM)
         {
-            if (DonSelectionne == null)
+            if (donModifieVM == null)
             {
                 return;
             }
             else
             {
-                ModifierDonViewModel pageModif = new ModifierDonViewModel(DonSelectionne);
+                Don donModifie = new Don(donModifieVM.Donateur, donModifieVM.Contenu, donModifieVM.Quantite, donModifieVM.EstPerissable);
+                _donDataProvider.ModifierDon(donModifie);
+                RaisePropertyChanged();
+                ChargerDonnees();
             }
+        }
     }
 
 }

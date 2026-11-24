@@ -2,6 +2,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Collections;
 
 namespace Guignolee.ViewModels
 {
@@ -100,6 +101,7 @@ namespace Guignolee.ViewModels
             }
         }
 
+
         public DateTime DateReception => _don.DateReception;
 
         public string Details
@@ -108,6 +110,11 @@ namespace Guignolee.ViewModels
             {
                 return $"{_don.Quantite} article(s) - {_don.Donateur} - reçu le {_don.DateReception:dd-MM-yyyy}";
             }
+        }
+
+        public IEnumerable GetErrors(string propertyName)
+        {
+            return base.GetErrors(propertyName);
         }
     }
 }

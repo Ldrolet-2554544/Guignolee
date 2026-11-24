@@ -1,14 +1,111 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!--  TODO: Question 5 : 1. Créer la page de modification de don  -->
 <Page
-    x:Class="Guignolee.Views.RegistrePage"
+    x:Class="Guignolee.Views.ModifierDonPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:Guignolee.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewmodels="using:Guignolee.ViewModels"
     mc:Ignorable="d">
-    
-    
-    
+
+    <StackPanel Padding="16" Spacing="12">
+
+        <!--  En-tête : Logo et titre  -->
+        <Grid Grid.Row="0" ColumnSpacing="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border BorderBrush="Pink" BorderThickness="1">
+                <Image
+                    Grid.Column="0"
+                    Width="72"
+                    Height="72"
+                    AutomationProperties.Name="Illustration : une boîte de dons avec un ruban"
+                    Source="ms-appx:///Assets/Images/geralt-christmas-9185561.jpg" />
+            </Border>
+
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock
+                    AutomationProperties.HeadingLevel="Level1"
+                    FontSize="28"
+                    FontWeight="SemiBold"
+                    Text="Modifier un don"
+                    TextWrapping="Wrap" />
+                <TextBlock Text="Guignolée du cégep" />
+            </StackPanel>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MaxWidth="560" />
+            </Grid.ColumnDefinitions>
+            <Border
+                Padding="16"
+                Background="White"
+                BorderBrush="#A4262C"
+                BorderThickness="1"
+                CornerRadius="8">
+                <StackPanel Spacing="12">
+                    <StackPanel>
+                        <TextBox
+                            Header="Donateur"
+                            PlaceholderText="Prénom Nom, nom de l'organisation, etc."
+                            Text="{x:Bind ViewModel.DonEdit.Donateur, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <ItemsView
+                            AutomationProperties.Name="Erreurs du donateur"
+                            Foreground="Coral"
+                            ItemsSource="{x:Bind ViewModel.DonEdit.GetErrors('Donateur'), Mode=OneWay}">
+                            <ItemsView.Resources>
+                                <SolidColorBrush x:Key="ItemContainerPointerOverBackground" Color="Transparent" />
+                            </ItemsView.Resources>
+                        </ItemsView>
+                    </StackPanel>
+
+                    <StackPanel>
+                        <TextBox
+                            Header="Contenu du don"
+                            PlaceholderText="Vêtements, livres, etc."
+                            Text="{x:Bind ViewModel.DonEdit.Contenu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <ItemsView
+                            AutomationProperties.Name="Erreurs du contenu"
+                            Foreground="Coral"
+                            ItemsSource="{x:Bind ViewModel.DonEdit.GetErrors('Contenu'), Mode=OneWay}">
+                            <ItemsView.Resources>
+                                <SolidColorBrush x:Key="ItemContainerPointerOverBackground" Color="Transparent" />
+                            </ItemsView.Resources>
+                        </ItemsView>
+                    </StackPanel>
+
+                    <StackPanel>
+                        <TextBox
+                            Header="Quantité (articles)"
+                            PlaceholderText="Nombre d'articles du don"
+                            Text="{x:Bind ViewModel.DonEdit.Quantite, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <ItemsView
+                            AutomationProperties.Name="Erreurs de la quantité"
+                            Foreground="Coral"
+                            ItemsSource="{x:Bind ViewModel.DonEdit.GetErrors('Quantite'), Mode=OneWay}">
+                            <ItemsView.Resources>
+                                <SolidColorBrush x:Key="ItemContainerPointerOverBackground" Color="Transparent" />
+                            </ItemsView.Resources>
+                        </ItemsView>
+                    </StackPanel>
+
+                    <CheckBox Content="Périssable" IsChecked="{x:Bind ViewModel.DonEdit.EstPerissable, Mode=TwoWay}" />
+
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button
+                            Background="#A4262C"
+                            Click="btnEnregistrer_Click"
+                            Content="Enregistrer"
+                            Foreground="White" />
+                        <Button Click="btnAnnuler_Click" Content="Annuler" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </StackPanel>
 </Page>

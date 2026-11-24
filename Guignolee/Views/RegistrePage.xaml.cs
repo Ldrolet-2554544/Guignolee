@@ -29,8 +29,8 @@ namespace Guignolee.Views
         public RegistreViewModel ViewModel { get; }
         public RegistrePage()
         {
-            ViewModel = new RegistreViewModel(new DonDataProvider());
             InitializeComponent();
+            ViewModel = new RegistreViewModel(new DonDataProvider());
             Loaded += MaisonPage_Loaded;
         }
 
@@ -38,10 +38,24 @@ namespace Guignolee.Views
         {
             ViewModel.ChargerDonnees();
         }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            if (e.Parameter is DonViewModel donModifie)
+            {
+                ViewModel.ModifierDon(donModifie);
+            }
+        }
 
         private void btnModifier_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.
+            if (ViewModel.DonSelectionne != null)
+            {
+                Frame.Navigate(
+                    typeof(ModifierDonPage),
+                    ViewModel.DonSelectionne
+                );
+            }
         }
 
         private void btnMarquerRemis_Click(object sender, RoutedEventArgs e)
